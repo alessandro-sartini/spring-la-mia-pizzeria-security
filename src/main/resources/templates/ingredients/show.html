@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starting::thymeleafAndThema}" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/starting::style}" />
+    <title>Pizze</title>
+</head>
+<body>
+
+   <header>
+        <th:block th:replace="~{fragments/navbar::navBar}"></th:block>
+
+    </header>
+    <main>
+
+        <div class="container text-center my-3">
+
+            <h1>[[${ingredient.name}]]</h1>
+
+        </div>
+    
+       
+        
+
+    </main>
+    <th:block th:replace="~{fragments/starting::js}" />
+
+</body>
+</html>

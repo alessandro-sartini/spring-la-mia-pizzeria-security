@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starting::thymeleafAndThema}" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/starting::style}" />
+    <title>Pizze</title>
+</head>
+<body>
+
+    <nav th:fragment="navBar" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm border-bottom border-warning">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" th:href="@{/home}">
+                <img src="/imgs/logo.jpg" alt="Logo" width="36" height="36" class="d-inline-block align-text-top me-2 rounded-circle border border-warning">
+                <span class="fw-bold text-warning" th:text="'Pizzeria'">Pizzeria</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light fw-semibold" th:href="@{/home}">Home</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light fw-semibold" th:href="@{/pizze}">Pizze</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light fw-semibold" th:href="@{/ingredient}">Ingredienti</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link btn btn-warning  fw-bold px-3 py-1 ms-2" th:href="@{/pizze/create}">Aggiungi pizza</a>
+                    </li>
+                    <!-- <ul class="navbar-nav">
+                        <li class="navbar-brand  "></li> -->
+                    <!-- <li class="nav-item  ">
+                        <a class="nav-link" th:href="@{/songs}" th:text="Songs">Songs</a>
+                    </li> -->
+                    <!-- </ul> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</body>
+</html>

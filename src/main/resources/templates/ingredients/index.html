@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:replace="~{fragments/starting::thymeleafAndThema}" />
+    <th:block th:replace="~{fragments/starting::style}" />
+    <title>Ingredienti</title>
+</head>
+<body>
+    <header>
+        <th:block th:replace="~{fragments/navbar::navBar}"></th:block>
+    </header>
+
+    <main>
+        <div class="container mt-4">
+            <h1 class="mb-4 fw-bold">Tutti gli ingredienti</h1>
+            <a class="mb-3 btn btn-primary" th:href="@{ingredient/create}">Aggiungi ingrediente</a>
+            <div th:if="${ingredients.size() > 0}">
+                <ul class="list-group">
+                    <li th:each="ingredient : ${ingredients}" th:object="${ingredient}" class="list-group-item d-flex justify-content-between align-items-center">
+                        <h2 class="fs-5 mb-0">[[*{name}]]</h2>
+                        <div class="d-flex justify-content-around">
+                            <a th:href="@{/ingredient/{id}(id=*{id})}" class="btn btn-outline-warning btn-sm mx-1">Dettagli</a>
+                            <a th:href="@{/ingredient/edit/{id}(id=*{id})}" class="btn btn-outline-primary btn-sm mx-1">Modifica</a>
+                            <form id="deleteIngredientForm" th:action="@{/ingredient/delete/{id}(id=*{id})}" method="post">
+                                <button type="submit" class="btn btn-outline-danger btn-sm mx-1">Elimina</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div th:unless="${ingredients.size() > 0}" class="text-danger">
+                <h1 class="mb-4">Nessun ingrediente disponibile</h1>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteConfirmModalLabel">Conferma Eliminazione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Sei sicuro di voler eliminare l'ingrediente <strong id="ingredientNameToDelete"></strong>? Questa azione è irreversibile.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                        <form id="deleteIngredientForm" th:action="@{/ingredient/delete/{id}(id=0)}" method="post">
+                            <button type="submit" class="btn btn-danger">Elimina</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <th:block th:replace="~{fragments/starting::js}" />
+    <script th:src="@{/js/script.js}"></script>
+   
+</body>
+</html>

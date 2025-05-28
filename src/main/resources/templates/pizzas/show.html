@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starting::thymeleafAndThema}" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/starting::style}" />
+    <title>Pizze</title>
+</head>
+<body>
+
+   <header>
+        <th:block th:replace="~{fragments/navbar::navBar}"></th:block>
+
+    </header>
+    <main>
+
+
+        <div th:if="${pizza}!=null" class="container my-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8 text-center">
+                    <h1 th:text="|Pizza: ${pizza.name}|" class="mb-4 display-4 fw-bold text-warning"></h1>
+                    <img class="img-fluid rounded-5 shadow-lg my-3 border border-3 border-warning" style="max-width:400px;" th:src="@{${pizza.urlPhoto}}" th:alt="${pizza.name}">
+                    <!-- ingredienti -->
+                    <div th:if="${pizza.ingredients.size()}>0" class="container my-4">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-10 col-lg-8 text-center">
+                            <ul class="list-group" >
+
+                                <li class="list-group-item" th:each="ingredient: ${pizza.ingredients}" th:text="${ingredient.name}"></li>
+
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:unless="${pizza.ingredients.size()}>0" class="container my-4">
+                        <div class="row justify-content-center text-center">
+                            <h4 class="text-danger">Non ci sono ingredienti assegnati alla pizza</h4>
+                        </div>
+                    </div>
+
+                      <!-- ingredienti -->
+                    <div class="card my-3 mx-auto border-warning bg-dark text-light" style="max-width: 600px;">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning fw-bold"><i class="bi bi-card-text me-2"></i>Descrizione:</h5>
+                            <p class="card-text fs-5" th:text="${pizza.description} ?${pizza.description}: 'Nessuna descrizione disponibile'"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="container my-4">
+            <div class="row justify-content-center">
+                <div class="col-auto mb-3">
+                    <!-- <a th:href="@{/pizze/create}" class="btn btn-primary col-5 m-1">Crea offerta</a> -->
+                    <a th:href="@{/pizze/offers/{id}(id=${pizza.id})}" class="btn btn-success btn-lg shadow-sm"><i class="bi bi-plus-circle me-2"></i>Aggiungi offerta pizza</a>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <ul class="list-group" th:each="offer: ${pizza.offers}">
+                        <li class="list-group-item d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-2 bg-dark text-light border-2 border-success shadow-sm">
+                            <div class="mb-2 mb-md-0">
+                                <h5 class="text-primary mb-1 fw-semibold"><i class="bi bi-star-fill text-warning me-1"></i>[[${offer.title}]]</h5>
+                                <span class="text-success fw-bold">Data inizio: [[${offer.startDate}]] </span>
+                                <span class="mx-2 text-secondary">&#8226;</span>
+                                <span class="text-danger fw-bold">Data termine: [[${offer.finishDate}]]</span>
+                            </div>
+                            <!-- RIGUARDA -->
+                            <div class="mt-2 mt-md-0 text-md-end">
+                                <a th:href="@{/offers/edit/{id}(id=${offer.id})}" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square me-1"></i>Aggiorna</a>
+                                
+                                <form th:action="@{/offers/delete/{id}(id=${offer.id})}" method="post">
+
+                                    <button type="submit" class="btn btn-outline-danger">elimina</button>
+
+                                </form>
+                                <!-- <a th:href="@{/offers/create}" class="btn btn-success">Aggiorna</a> -->
+                            </div>
+                            <!-- RIGUARDA -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+       
+        <div th:unless="${pizza}!=null" class="container my-4 text-center">
+            <h1 th:text="|Nessuna pizza disponibile|"> </h1>    
+        </div>
+
+    </main>
+        <th:block th:replace="~{fragments/starting::js}" />
+
+</body>
+</html>

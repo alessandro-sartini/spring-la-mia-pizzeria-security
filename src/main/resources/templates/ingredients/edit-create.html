@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<th:block th:fragment="thymeleafAndThema">
+
+    <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+
+</th:block>
+<head>
+    <meta charset="UTF-8">
+    
+    <th:block th:fragment="style">
+
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.5/css/bootstrap.min.css}">
+
+    </th:block>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <th:block th:replace="~{fragments/navbar::navBar}"></th:block>
+
+    </header>
+    <main>
+        <div class="container my-4" th:object="${ingredient}">
+            <div class="text-center">
+
+                <h1 th:if="${edit}" th:text="|Aggiorna dati: |"></h1>
+                <span class="text-warning fs-2">[[*{name}]]</span>
+            </div>
+            <h1 th:unless="${edit}">Aggiungi categoria:</h1>
+            <form id="ingredient-form"  th:action="${edit} ? @{/ingredient/edit/{id}(id=*{id})} :  @{/ingredient/create}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}"  th:errorclass="is-invalid">
+                    
+                    <!-- errori -->
+                    <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+
+                        <ul>
+                            <li  th:each="error: ${#fields.errors('name')}" th:text="${error}"></li>
+                        </ul>
+
+                    </div>
+                </div>
+                
+                
+                <input type="submit" class="btn btn-primary" th:value="${edit} ? 'aggiorna dati' : 'Crea ingediente'"/>
+            </form>
+        </div>
+
+    
+
+    </main>
+        
+        <th:block th:fragment="js">
+            <script th:src="@{/webjars/bootstrap/5.3.5/js/bootstrap.bundle.min.js}"></script>
+        </th:block>
+    </body>
+    </html>

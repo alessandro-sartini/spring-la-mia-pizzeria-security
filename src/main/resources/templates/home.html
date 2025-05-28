@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starting::thymeleafAndThema}" />
+ <!-- <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark"></html> -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/starting::style}" />
+    <!-- <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"> -->
+    <title>Pizze</title>
+</head>
+<body>
+    <header>
+        <th:block th:replace="~{fragments/navbar::navBar}"></th:block>
+    </header>
+
+   <main>
+    <section class="bg-dark text-white text-center py-5">
+        <div class="container">
+            <div class="bg-danger rounded-circle d-flex align-items-center justify-content-center fw-bold text-white mx-auto mb-4 shadow-lg" style="width: 150px; height: 150px; font-size: 2.5rem;">
+                                   <img th:src="@{imgs/logo.jpg}" class="img-fluid rounded-4" alt="Ingredienti di Qualità">
+
+            </div>
+            <h1 class="display-4 mb-3">Benvenuti al Time Out!</h1>
+            <p class="lead">
+                Da oltre 25 anni, un sapore che fa storia. Dal 2000, la nostra passione per la pizza artigianale delizia i palati di tutti.
+            </p>
+            <p class="lead">
+                Vieni a scoprire le nostre specialità, preparate con ingredienti freschi e amore per la tradizione.
+            </p>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row text-center">
+            <div class="col-md-8 mx-auto">
+                <h2 class="mb-4 text-primary">Le Nostre Specialità</h2>
+                <p class="fs-5 text-secondary">
+                    Dalla classica Margherita alle creazioni più innovative, ogni pizza è un capolavoro di gusto.
+                    Utilizziamo solo farine selezionate, pomodoro fresco e mozzarella di prima qualità per garantirti un'esperienza indimenticabile.
+                </p>
+                <a th:href="@{'/'+'pizze'}" class="btn btn-danger btn-lg mt-4 shadow">Scopri il Menu Completo</a>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 rounded-4 shadow-sm">
+                    <img src="https://placehold.co/400x250/dc3545/ffffff?text=Pizza+Tradizionale" class="card-img-top rounded-top-4" alt="Pizza Tradizionale">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-danger">Pizze Tradizionali</h5>
+                        <p class="card-text text-muted">Le ricette classiche che hanno reso grande la pizza italiana.</p>
+                        <a href="#" class="btn btn-outline-danger mt-auto">Vedi Dettagli</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 rounded-4 shadow-sm">
+                    <img src="https://placehold.co/400x250/0d6efd/ffffff?text=Pizze+Speciali" class="card-img-top rounded-top-4" alt="Pizze Speciali">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-primary">Le Nostre Creazioni Speciali</h5>
+                        <p class="card-text text-muted">Scopri gusti unici e abbinamenti sorprendenti, frutto della nostra innovazione.</p>
+                        <a href="#" class="btn btn-outline-primary mt-auto">Vedi Dettagli</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 rounded-4 shadow-sm">
+                    <img th:src="@{imgs/menu_logo.png}" class="card-img-top rounded-top-4" alt="Ingredienti di Qualità">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-success">Ingredienti di Alta Qualità</h5>
+                        <p class="card-text text-muted">Selezioniamo solo il meglio per offrirti un'esperienza di gusto autentica.</p>
+                        <a th:href="@{https://www.menu.it/it/home}" class="btn btn-outline-success mt-auto">Scopri di Più</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="https://placehold.co/600x400/6c757d/ffffff?text=La+Nostra+Pizzeria" class="img-fluid rounded-4 shadow-lg" alt="Interno Pizzeria">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-3 text-secondary">La Nostra Storia</h2>
+                    <p class="lead text-secondary">
+                        Dal 2000, la nostra pizzeria è un punto di riferimento per gli amanti della buona cucina.
+                    </p>
+                    <p class="text-secondary">
+                        Nata dalla passione di Di Pace per l'arte della pizza, abbiamo mantenuto viva la tradizione, innovando sempre per offrire il meglio ai nostri clienti. Festeggiamo quest'anno i nostri primi 25 anni di successi e siamo pronti per le prossime generazioni di sapori!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5 text-center">
+        <h2 class="mb-4 text-info">Vieni a Trovarci!</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4 rounded-4 shadow">
+                    <p class="fs-5 mb-2"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Via Salvo D'Acquisto, 123, San Prospero - 41030</p>
+                    <p class="fs-5 mb-2"><i class="bi bi-telephone-fill text-success me-2"></i>+39 059 906663</p>
+                    <!-- <p class="fs-5 mb-4"><i class="bi bi-envelope-fill text-primary me-2"></i>info@[nomepizzeria].it</p> -->
+                    <a th:href="@{https://www.google.com/maps/place/Pizzeria+Time+Out+Di+Di+Pace+Giuseppe/@44.7925407,11.0202593,17z/data=!3m1!4b1!4m6!3m5!1s0x477f949a9956588d:0x54f03034b9dff6dc!8m2!3d44.7925369!4d11.0228342!16s%2Fg%2F11g_m79kt?entry=ttu&g_ep=EgoyMDI1MDUxNS4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D}" class="btn btn-warning text-white">Visualizza sulla Mappa</a>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <h3 class="mt-4 mb-3 text-secondary">Orari di Apertura:</h3>
+                <ul class="list-unstyled text-muted">
+                    <li>Martedì - Venerdì: 18:00 - 21:30</li>
+                    <li>Sabato - Domenica: 18:00 - 22:00</li>
+                    <li>Lunedì: Chiuso</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+        <th:block th:replace="~{fragments/starting::js}" />
+
+</body>
+</html>

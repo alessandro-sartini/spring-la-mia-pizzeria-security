@@ -26,10 +26,16 @@
                         <a class="nav-link text-light fw-semibold" th:href="@{/pizze}">Pizze</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-light fw-semibold" th:href="@{/ingredient}">Ingredienti</a>
-                    </li>
+                        <a class="nav-link text-light fw-semibold" th:href="@{/ingredient}" sec:authorize="hasAuthority('ADMIN')">Ingredienti</a>
+                    </li>                    
+                    
                     <li class="nav-item mx-2">
-                        <a class="nav-link btn btn-warning  fw-bold px-3 py-1 ms-2" th:href="@{/pizze/create}">Aggiungi pizza</a>
+                        <a class="nav-link btn btn-warning  fw-bold px-3 " th:href="@{/pizze/create}" sec:authorize="hasAuthority('ADMIN')">Aggiungi pizza</a>
+                    </li>
+                    
+                    <!-- logOut -->
+                    <li class="nav-item mx-2">
+                       <a class="nav-link btn btn-danger  fw-bold px-3" th:href="@{/logout}">logout</a>
                     </li>
                     <!-- <ul class="navbar-nav">
                         <li class="navbar-brand  "></li> -->

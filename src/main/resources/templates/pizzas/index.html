@@ -24,24 +24,51 @@
             </div>
 
             <h1 class="my-4 text-warning fw-bold display-5">Elenco pizze: </h1>
+
+
             <div class="row g-4" th:if="${pizzaList.size() > 0}">
-                <div th:each="pizza : ${pizzaList}" th:object="${pizza}" class="col-12 col-sm-6 col-lg-4 d-flex align-items-stretch">
-                    <div class="card bg-dark text-light shadow w-100 border-warning">
-                        <img th:src="*{urlPhoto}" class="card-img-top img-fluid rounded-top" style="object-fit:cover; height:220px; background:#222;" alt="foto pizza">
-                        <div class="card-body text-center d-flex flex-column justify-content-between">
-                            <h5 class="card-title text-warning fw-bold" th:text="|*{name}|"></h5>
-                            <p class="card-text fs-5 mb-2" th:text="|prezzo: €*{price}|"></p>
-                            <div class="d-flex flex-wrap justify-content-center gap-2 mt-auto">
-                                <a th:href="@{pizze/{id}(id=*{id})}" class="btn btn-outline-warning btn-sm">Dettagli</a>
-                                <a th:href="@{pizze/edit/{id}(id=*{id})}" class="btn btn-outline-primary btn-sm">Modifica</a>
-                                <button type="button" class="btn btn-outline-danger btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#deleteConfirmModal"
-                                        th:data-pizza-id="*{id}"
-                                        th:data-pizza-name="*{name}">
+                <div class="row g-4">
+                    <div th:each="pizza : ${pizzaList}" th:object="${pizza}" class="col-12 col-sm-6 col-lg-4 d-flex align-items-stretch">
+                        <div class="card bg-dark text-light shadow w-100 border-warning">
+                            <img th:src="*{urlPhoto}" class="card-img-top img-fluid rounded-top" style="object-fit:cover; height:220px; background:#222;" alt="foto pizza">
+                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                <h5 class="card-title text-warning fw-bold" th:text="|*{name}|"></h5>
+                                <p class="card-text fs-5 mb-2" th:text="|prezzo: €*{price}|"></p>
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mt-auto">
+                                    <a th:href="@{pizze/{id}(id=*{id})}" class="btn btn-outline-warning btn-sm">Dettagli</a>
+                                    <a th:href="@{pizze/edit/{id}(id=*{id})}" class="btn btn-outline-primary btn-sm"
+                                    sec:authorize="hasAuthority('ADMIN')">Modifica</a>
+
+                                    <button type="button" class="btn btn-outline-danger btn-sm" 
+                                            th:data-bs-target="'#delete-modal-' + *{id}" 
+                                            data-bs-toggle="modal"
+                                            th:data-pizza-name="*{name}" 
+                                            
+                                            sec:authorize="hasAuthority('ADMIN')">
                                         Elimina
-                                </button>
-                                <!-- <a th:href="@{pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Crea offerta</a> -->
+                                    </button>
+
+                                    <div class="modal fade" th:id="*{'delete-modal-' + id}" tabindex="-1" 
+                                        th:aria-labelledby="${'delete-modal-' + id + 'Label'}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" th:id="${'delete-modal-' + id + 'Label'}">Conferma Eliminazione</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Sei sicuro di voler eliminare la pizza <strong th:text="*{name}"></strong>? Questa azione è irreversibile.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                    <form th:id="*{'deletePizzaForm-' + id}" th:action="@{/pizze/delete/{id}(id=*{id})}" method="post">
+                                                        <button type="submit" class="btn btn-danger">Elimina</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -53,7 +80,17 @@
             <h1 class="text-danger">Nessuna pizza disponibile</h1>
         </div>
         
-        <div class="modal fade" id="deleteConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+        <!-- <button type="button" class="btn btn-outline-danger btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteConfirmModal"
+                th:data-pizza-id="*{id}"
+                th:data-pizza-name="*{name}"
+                sec:authorize="hasAuthority('ADMIN')"
+                >
+                Elimina
+        </button> -->
+        <!-- <a th:href="@{pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Crea offerta</a> -->
+        <!-- <div class="modal fade" id="deleteConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -71,7 +108,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </main>
     
     <th:block th:replace="~{fragments/starting::js}" />

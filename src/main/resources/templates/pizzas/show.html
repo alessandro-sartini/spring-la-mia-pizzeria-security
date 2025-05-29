@@ -55,9 +55,14 @@
 
         <div class="container my-4">
             <div class="row justify-content-center">
-                <div class="col-auto mb-3">
+                <div class="col-auto mb-3"  
+                sec:authorize="hasAuthority('ADMIN')"
+                >
                     <!-- <a th:href="@{/pizze/create}" class="btn btn-primary col-5 m-1">Crea offerta</a> -->
-                    <a th:href="@{/pizze/offers/{id}(id=${pizza.id})}" class="btn btn-success btn-lg shadow-sm"><i class="bi bi-plus-circle me-2"></i>Aggiungi offerta pizza</a>
+                    <a th:href="@{/pizze/offers/{id}(id=${pizza.id})}" class="btn btn-success btn-lg shadow-sm">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        Aggiungi offerta pizza
+                    </a>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -72,9 +77,12 @@
                             </div>
                             <!-- RIGUARDA -->
                             <div class="mt-2 mt-md-0 text-md-end">
-                                <a th:href="@{/offers/edit/{id}(id=${offer.id})}" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square me-1"></i>Aggiorna</a>
+                                <a th:href="@{/offers/edit/{id}(id=${offer.id})}" class="btn btn-outline-success btn-sm"
+                                sec:authorize="hasAuthority('ADMIN')"
+                                ><i class="bi bi-pencil-square me-1"></i>Aggiorna</a>
                                 
-                                <form th:action="@{/offers/delete/{id}(id=${offer.id})}" method="post">
+                                <form th:action="@{/offers/delete/{id}(id=${offer.id})}" method="post"
+                                  sec:authorize="hasAuthority('ADMIN')">
 
                                     <button type="submit" class="btn btn-outline-danger">elimina</button>
 

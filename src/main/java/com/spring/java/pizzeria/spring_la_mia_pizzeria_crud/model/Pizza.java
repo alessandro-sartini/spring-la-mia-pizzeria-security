@@ -47,11 +47,11 @@ public class Pizza {
     private BigDecimal price;
 
     // Per evitare  RICORSIONEEEE
-    @JsonManagedReference
+    // @JsonManagedReference
     @OneToMany(mappedBy = "pizza")
     private List<SpecialOffer> offers;
 
-    @JsonManagedReference
+    // @JsonManagedReference
     @ManyToMany
     @JoinTable( 
         name = "ingredient_pizza",

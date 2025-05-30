@@ -29,7 +29,7 @@ public class SecurityConfiguration {
         .and().logout()
         .and().exceptionHandling()
         
-        // PER TESTING IN POSTMAN DATA AUTENTICAZIONE
+        // PER TESTING IN POSTMAN rotte POST
         .and().csrf().disable();
 
 

@@ -41,24 +41,26 @@ public class PizzaController {
 
         return "pizzas/index";
     }
+    
+    @GetMapping("/searchByName")
+    public String searchIndex(Model model, @RequestParam(name = "query") String query, Authentication authentication) {
 
+        List<Pizza> pizzaList = pizzaService.findByNameOrDescription(query);
+        model.addAttribute("username", authentication.getName());
+
+        model.addAttribute("pizzaList", pizzaList);
+
+        return "pizzas/index";
+    }
+    
     @GetMapping("/{id}")
-    public String show(Model model, @PathVariable("id") int id) {
+    public String show(Model model, @PathVariable("id") Integer id) {
         Pizza result = pizzaService.getByid(id);
 
         model.addAttribute("pizza", result);
         return "pizzas/show";
     }
 
-    @GetMapping("/searchByName")
-    public String searchIndex(Model model, @RequestParam(name = "query") String query) {
-
-        List<Pizza> pizzaList = pizzaService.findByNameOrDescription(query);
-
-        model.addAttribute("pizzaList", pizzaList);
-
-        return "pizzas/index";
-    }
 
     @GetMapping("/create")
     public String create(Model model) {

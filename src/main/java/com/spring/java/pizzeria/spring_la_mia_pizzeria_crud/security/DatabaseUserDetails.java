@@ -30,23 +30,23 @@ public class DatabaseUserDetails implements UserDetails {
 
     }
 
-
+    
     public Integer getId() {
         return this.id;
     }
 
-
+    @Override
     public String getUsername() {
         return this.username;
     }
 
-
+    @Override
     public String getPassword() {
         return this.password;
     }
 
 
-
+    @Override
     public Set<GrantedAuthority> getAuthorities() {
         return this.authorities;
     }

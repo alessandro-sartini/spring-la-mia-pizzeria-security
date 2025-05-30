@@ -2,6 +2,7 @@ package com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,11 +32,12 @@ public class PizzaController {
     private PizzaService pizzaService;
 
     @GetMapping
-    public String index(Model model) {
+    public String index(Model model, Authentication authentication) {
 
         List<Pizza> pizzaList = pizzaService.findAll();
 
         model.addAttribute("pizzaList", pizzaList);
+        model.addAttribute("username", authentication.getName());
 
         return "pizzas/index";
     }

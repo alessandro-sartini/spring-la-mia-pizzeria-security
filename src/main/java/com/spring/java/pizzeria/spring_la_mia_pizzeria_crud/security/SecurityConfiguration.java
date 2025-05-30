@@ -15,20 +15,28 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    @SuppressWarnings("removal")
+    @SuppressWarnings("removal") 
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+
         http.authorizeRequests()
-        .requestMatchers("/pizze/create", "/pizze/edit/**").hasAuthority("ADMIN")
-        .requestMatchers(HttpMethod.POST, "/pizze/**").hasAuthority("ADMIN")
-        .requestMatchers("/ingredient","/ingredient/**").hasAuthority("ADMIN")
-        .requestMatchers("/pizze", "/pizze/**").hasAnyAuthority("ADMIN", "USER")
+        .requestMatchers(HttpMethod.POST, "/ingredient/create", "/ingredint/edit").hasAnyAuthority("ADMIN")
+        .requestMatchers(HttpMethod.POST, "/pizze/create", "/pizze/edit").hasAuthority("ADMIN")
+        .requestMatchers("/ingredient", "/ingredient/**").hasAuthority("ADMIN")
+        .requestMatchers( "/home","/pizzas", "/pizzas/**").hasAnyAuthority("ADMIN","USER")
         .requestMatchers("/**").permitAll()
         .and().formLogin()
+        .defaultSuccessUrl("/home", true)
         .and().logout()
-        .and().exceptionHandling();
+        .and().exceptionHandling()
+        
+        // PER TESTING IN POSTMAN DATA AUTENTICAZIONE
+        .and().csrf().disable();
 
+
+        
         return http.build();
     }
+   
 
     @Bean
     @SuppressWarnings("deprecation")

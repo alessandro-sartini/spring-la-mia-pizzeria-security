@@ -8,44 +8,40 @@
 </head>
 <body>
 
-    <nav th:fragment="navBar" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm border-bottom border-warning">
+    <nav th:fragment="navBar" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg border-bottom border-warning py-3">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" th:href="@{/home}">
-                <img src="/imgs/logo.jpg" alt="Logo" width="36" height="36" class="d-inline-block align-text-top me-2 rounded-circle border border-warning">
-                <span class="fw-bold text-warning" th:text="'Pizzeria'">Pizzeria</span>
+                <img src="https://placehold.co/36x36/FACC15/000?text=Logo" alt="Logo" width="36" height="36" class="d-inline-block align-text-top me-2 rounded-circle border border-warning">
+                <span class="fw-bold text-warning fs-5" th:text="'Pizzeria'">Pizzeria</span>
             </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-2">
-                        <a class="nav-link text-light fw-semibold" th:href="@{/home}">Home</a>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <li class="nav-item mx-2">
+                        <a class="nav-link text-light fw-semibold rounded" th:href="@{/home}">Home</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-light fw-semibold" th:href="@{/pizze}">Pizze</a>
+                        <a class="nav-link text-light fw-semibold rounded" th:href="@{/pizze}">Pizze</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-light fw-semibold" th:href="@{/ingredient}" sec:authorize="hasAuthority('ADMIN')">Ingredienti</a>
-                    </li>                    
-                    
-                    <li class="nav-item mx-2">
-                        <a class="nav-link btn btn-warning  fw-bold px-3 " th:href="@{/pizze/create}" sec:authorize="hasAuthority('ADMIN')">Aggiungi pizza</a>
+                        <a class="nav-link text-light fw-semibold rounded" th:href="@{/ingredient}" sec:authorize="hasAuthority('ADMIN')">Ingredienti</a>
                     </li>
                     
-                    <!-- logOut -->
-                    <div>
-                Logged: <span sec:authentication="name"></span>
-                Role: <span sec:authentication="principal.authorities"></span>
-                <a class="nav-link btn btn-danger fw-bold px-3 " href="/logout">Sign out</a>
-                
-            </div>
-                    <!-- <ul class="navbar-nav">
-                        <li class="navbar-brand  "></li> -->
-                    <!-- <li class="nav-item  ">
-                        <a class="nav-link" th:href="@{/songs}" th:text="Songs">Songs</a>
-                    </li> -->
-                    <!-- </ul> -->
+                    <li class="nav-item mx-2 button-item">
+                        <a class="nav-link btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm text-dark" th:href="@{/pizze/create}" sec:authorize="hasAuthority('ADMIN')">Aggiungi pizza</a>
+                    </li>
+                    
+                    <li class="nav-item mx-2 d-flex flex-column flex-lg-row align-items-lg-center text-light small mt-3 mt-lg-0">
+                        <span class="d-block d-lg-inline-block me-lg-2">Logged: <span class="fw-bold text-white" sec:authentication="name"></span></span>
+                        <span class="d-block d-lg-inline-block">Role: <span class="fw-bold text-white" sec:authentication="principal.authorities"></span></span>
+                    </li>
+                    <li class="nav-item mx-2 button-item">
+                        <a class="nav-link btn btn-danger fw-bold px-4 py-2 rounded-pill shadow-sm text-white" href="/logout">Sign out</a>
+                    </li>
+
                 </ul>
             </div>
         </div>
